@@ -6,11 +6,11 @@ const auth = require("../middleware/userauth");
 
 router.post("/", async (req, res) => {
     try {
-        const {email, password, passwordVerify} = req.body;
+        const {email, first_name,last_name, classs , password, passwordVerify} = req.body;
 
         // validation
         
-        if(!email || !password || !passwordVerify)
+        if(!email || !first_name || !last_name  || !classs || !password || !passwordVerify)
             return res.status(400).json({errorMessage:"Please Enter all Required fields"});
         
         if(password.length < 6)
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
         // save suer account 
 
         const newUser = new User({
-            email,passwordHash
+            email,first_name,last_name,classs,passwordHash
         });
         const savedUser = await newUser.save();
 
@@ -105,7 +105,9 @@ router.post("/tokenIsValid", async (req, res)=>{
         return res.json({
             user: {
                 email : user.email,
-                
+                first_name : user.first_name,
+                last_name:user.last_name,
+                classs:user.classs,
             }});
 
     }

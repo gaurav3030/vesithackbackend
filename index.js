@@ -36,3 +36,5 @@ mongoose.connect(process.env.MDB_CONNECT,{
 //set routes
 
 app.use("/auth",require("./routers/userRouter"));
+app.use("/society",require("./routers/societyRouter"));
+app.use("/event",require("./routers/eventRouter"));
